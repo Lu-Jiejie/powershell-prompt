@@ -1,5 +1,7 @@
 # Powershell Prompt
 
+English | [简体中文](./README.zh-CN.md)
+
 Change your [Windows Powershell](https://github.com/PowerShell/PowerShell) prompt to [Starship](https://github.com/starship/starship) style using only several ps1 scripts!
 
 ![img1](./asset/img1.png)
@@ -22,13 +24,15 @@ Import-Module <path-to-repository>\Prompt.psm1
 
 ## Features
 
-+ Show current git branch and status of current project.
++ Show current Git branch and status of current project.
 + Show the package version of current project.
 + Show thr environment and it's version of current project. 
 
 ## Why?
 
-I wanted to have a simple way to change my Powershell prompt to Starship style without having to install any additional software, although it said it is minimal. All the scripts are written in Powershell and are very simple to understand and modify, and make me feel like I'm in control of my prompt.
++ No need to install any other software.
++ All code is written in ps1 scripts, easy to understand and modify.
++ No runtime other than Powershell is used.
 
 ## References
 
