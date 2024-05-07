@@ -1,11 +1,4 @@
-function Get-PathInfo {
-  $currentPath = $(Get-Location) -replace "\\", "/"
-  $ansiCyan = "`e[1;36m"
-
-  return "$ansiCyan$currentPath$ansiReset"
-}
-
-function Get-GitInfo {
+function Get-GitStatus() {
   $ansiReset = "`e[0m"
   $ansiRed = "`e[1;31m"
   $ansiPurple = "`e[1;35m"
@@ -18,7 +11,7 @@ function Get-GitInfo {
     $gitStatus = & git status --porcelain 2>$null
     $gitAhead = & git rev-list --left-right --count origin/$gitBranch...HEAD 2>$null
   
-    $gitInfo = "$ansiReset$ansiBold on $ansiPurple$branchIcon $gitBranch"
+    $gitInfo = "$ansiReset on $ansiPurple$branchIcon $gitBranch"
     $statusInfo = ""
     if ($gitStatus -match "UU") {
       $statusInfo += "🗴"
@@ -42,29 +35,15 @@ function Get-GitInfo {
       }
     }
     if ($statusInfo) {
-      $gitInfo += " $ansiRed[$statusInfo]$ansiReset"
+      $gitInfo += " $ansiRed[$statusInfo]"
     }
   }
   else {
     $gitInfo = ""
   }
+  $gitInfo = "$gitInfo$ansiReset"
 
   return $gitInfo
 }
-# ❯
-function Prompt {
-  $currentPath = $(Get-Location) -replace "\\", "/"
-  $ansiCyan = "`e[1;36m"
-  $ansiBold = "`e[1m"
-  $ansiOrange = "`e[38;5;208m"
-  $ansiReset = "`e[0m"
-  $pathInfo = Get-PathInfo
-  $gitInfo = Get-GitInfo
 
-  return "$pathInfo" + `
-    "$gitInfo" + `
-    "$ansiReset`n➜ "
-}
-
-
-#Invoke-Expression (&starship init powershell)
+Export-ModuleMember -Function *
